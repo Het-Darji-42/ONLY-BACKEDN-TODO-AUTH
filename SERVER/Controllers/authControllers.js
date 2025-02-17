@@ -1,5 +1,8 @@
 const userModel= require('../Models/User.model')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+const dotenv = require('dotenv')
+dotenv.config()
 
 const registerUser = async(req , res)=>{
     
@@ -46,9 +49,16 @@ const logIn = async (req,res) => {
             })
         }
 
+        const sercret = process.env.JWT_SECRET
+        const token = jwt.sign(
+            {id : user._id},
+            sercret, 
+            {expiresIn : '2h'}
+        )
+
         res.status(200).json({
             message : 'Login Successfully', 
-            user : user
+            token : token
         })
         
 

@@ -18,12 +18,12 @@ const todoSchema = mongoose.Schema({
         default : false
     } ,
     
-    //for userModel 
-    // user:{
-    //     type : mongoose.Schema.Types.ObjectId,
-    //     ref : "User", 
-    //     required : true
-    // }
+    // for userModel 
+    user:{
+        type : mongoose.Schema.Types.ObjectId,
+        ref : "User", 
+        required : true
+    }
 
 },{timestamps:true})
 

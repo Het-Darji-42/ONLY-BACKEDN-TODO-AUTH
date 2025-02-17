@@ -1,9 +1,10 @@
 const todoModel = require('../Models/Todo.model')
 
 const allTodo = async(req , res)=>{
-    try {
-        const {task , description , isCompleted} = req.body
-        const todo = await todoModel.find()
+    try {   
+
+        const userId = req.user.id;
+        const todo = await todoModel.find({ user : userId})
         res.status(200).json({
             message : "Todo Fetched Successfully",
             todo : todo 
@@ -27,8 +28,8 @@ const createTodo = async(req , res)=>{
             })
         }
         
-        
-        const todo = await todoModel.create({task , description})
+        const userId = req.user.id;
+        const todo = await todoModel.create({task , description , user : userId})
         res.status(200).json({
             message : "Todo Created Successfully",
             todo : todo 
